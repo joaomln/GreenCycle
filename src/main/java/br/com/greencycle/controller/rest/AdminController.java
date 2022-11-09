@@ -23,13 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * A class used to serve server-side rendered views.<br>
- * As defined in the security configuration, only users with the role of
- * EMPLOYEE can use these endpoints.<br>
- * This is achieved by setting the root route of this controller to
- * {@code /employee/**}.
- */
 @Controller
 @RequestMapping("admin")
 @SessionAttributes({ "fimReservaBean" })

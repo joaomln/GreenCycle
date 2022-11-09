@@ -38,12 +38,6 @@ public class FimReservaBean {
     @NotNull(message = "{notNull}")
     private Empresa empresaDevolucao;
 
-    /**
-     * Creates a {@link FimReservaBean} object from a {@link Reserva} object
-     *
-     * @param reserva The rental to be turned into a FinishRentalBean
-     * @return converted rental as FinishRentalBean
-     */
     public static FimReservaBean fromReserva(Reserva reserva) {
         return new FimReservaBean(
                 reserva.getCdReserva(),

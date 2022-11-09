@@ -27,15 +27,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomSuccessHandler successHandler;
 
-    /**
-     * Creates two in memory users with each having a specific role.
-     * username: admin and password: admin has the role of ADMIN.
-     * username: emp and password: emp has the role of EMPLOYEE
-     *
-     * @param auth the AuthenticationManagerBuilder used to define the in memory
-     *             users.
-     * @throws Exception
-     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
@@ -44,17 +35,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .roles("ADMIN");
     }
 
-    /**
-     * Enables basic HTTP authorization, disables CSRF.
-     * Any route with the wildcard /admin/** can only be accessed by an authorized
-     * user with the role ADMIN.
-     * Any route with the wildcard /employee/** can only be accessed by an
-     * authorized user with the role EMPLOYEE.
-     * All other routes are public.
-     *
-     * @param http HttpSecurity object used for configurtaion
-     * @throws Exception
-     */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.httpBasic().and()
@@ -88,17 +68,6 @@ class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
-    /**
-     * Determines where the user should be redirected after a login considering the
-     * role.
-     * ADMIN is redirected to /admin/running-rentals, which is a REST endpoint.
-     * EMPLOYEE is redirected to the homepage /.
-     * Everyone else is redirected to the login page.
-     *
-     * @param authentication authentication object used for getting the authorities
-     *                       of a request
-     * @return the redirection URL as String
-     */
     protected String determineTargetUrl(Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         List<String> roles = new ArrayList<>();

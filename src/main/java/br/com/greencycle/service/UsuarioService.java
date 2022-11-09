@@ -25,15 +25,6 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    /**
-     * Saves the given customer.
-     *
-     * @param usuario customer to be saved
-     * @return the saved customer coming from the database (only if no exceptions
-     *         occur)
-     * @throws EntityExistsException if the given primary key already belongs to an
-     *                               existing entity
-     */
     public Usuario create(Usuario usuario) {
         if (usuarioRepository.existsById(usuario.getIdUsuario())) {
             throw new EntityExistsException(messages.get("customerAlreadyExists"));

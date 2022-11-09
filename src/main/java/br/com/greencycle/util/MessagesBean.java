@@ -6,10 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Locale;
 
-/**
- * Utility class to make the gathering of properties from messages_en.properties
- * easier.
- */
 @Component
 public class MessagesBean {
 
