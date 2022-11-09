@@ -1,0 +1,57 @@
+<div layout:decorate="~{index}" layout:fragment="content">
+    <h1 class="mt-4">Explore</h1>
+    <p class="lead">Procure por Bikes em sua região!</p>
+    <hr>
+
+    <form action="/" method="post" th:object="${empresaSelecionadaBean}">
+        <div class="form-group row">
+            <label class="col-sm-2" for="empresa">Selecione sua empresa</label>
+            <div class="col-sm-10">
+                <select class="form-control form-control-sm" id="empresa" th:field="*{empresa}">
+                    <option th:each="empresa : ${empresas}" th:text="${empresa.nomeEmpresa}"
+                        th:value="${empresa.idEmpresa}">
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <span class="col-sm-2"></span>
+            <div class="col-sm-10">
+                <input class="btn btn-primary" type="submit" value="Procurar">
+            </div>
+        </div>
+    </form>
+
+    <div th:if="${bikes != null}">
+        <hr>
+        <div th:switch="${bikesListSize}" th:with="bikesListSize=${#lists.size(bikes)}">
+            <p class="text-center info" th:case="0">0 bikes encontradas.<br>Não há nenhuma bike registrada nessa
+                empresa.</p>
+            <div th:case="*">
+                <table class="table table-borderless table-hover table-sm">
+                    <caption class="text-center info"
+                        th:text="${bikesListSize + (bikesListSize == 1 ? ' bike' : ' bikes') + ' encontrada(s)'}">
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>Código da Bicicleta</th>
+                            <th>Marca</th>
+                            <th>Tipo</th>
+                            <th>Modelo</th>
+                            <th>Empresa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="bike : ${bikes}">
+                            <td th:text="${bike.idBike}"></td>
+                            <td th:text="${bike.marca}"></td>
+                            <td th:text="${bike.tipo}"></td>
+                            <td th:text="${bike.modelo}"></td>
+                            <td th:text="${bike.empresa?.nomeEmpresa}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

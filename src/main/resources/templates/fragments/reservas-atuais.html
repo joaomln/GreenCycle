@@ -1,0 +1,50 @@
+<div layout:decorate="~{index}" layout:fragment="content">
+    <h1 class="mt-4">Reservas Atuais</h1>
+    <p class="lead">Lista de Bikes reservadas atualmente.</p>
+    <hr>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${!error.isBlank()}">
+        <span th:text="${error}"></span>
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${!success.isBlank()}">
+        <span th:text="${success}"></span>
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div th:switch="${reservasListSize}" th:with="reservasListSize=${#lists.size(reservas)}">
+        <p class="text-center info" th:case="0">0 reservas encotradas.<br>Atualmente, nenhum usuário reservou uma bike!
+        </p>
+        <table class="table table-borderless table-hover table-sm" style="width: 100%;" th:case="*">
+            <caption class="text-center" style="font-size: 12px;"
+                th:text="${reservasListSize + (reservasListSize == 1 ? ' reserva' : ' reservas') + ' encontrada(s)'}">
+            </caption>
+            <thead>
+                <tr>
+                    <th>Id Reserva</th>
+                    <th>Data reserva</th>
+                    <th>Empresa da reserva</th>
+                    <th>Usuario</th>
+                    <th>Bike</th>
+                    <th>Finalizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reserva : ${reservas}">
+                    <td th:text="${reserva.cdReserva}">Id</td>
+                    <td th:text="${reserva.dtRetirada}">Rental date</td>
+                    <td th:text="${reserva.empresaRetirada.nomeEmpresa}">Rental station</td>
+                    <td th:text="${reserva.usuario}"></td>
+                    <td th:text="${reserva.bike}">Car</td>
+                    <td><a class="btn btn-warning btn-sm"
+                            th:href="@{'finalizar-reservas/' + ${reserva.cdReserva}}">Finalizar</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
