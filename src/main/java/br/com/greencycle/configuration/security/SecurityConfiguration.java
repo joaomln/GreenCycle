@@ -1,4 +1,4 @@
-package br.com.greencycle.configuration;
+package br.com.greencycle.configuration.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

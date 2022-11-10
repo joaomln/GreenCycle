@@ -1,11 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" th:fragment="topnav">
-    <button class="btn btn-link text-secondary" id="menu-toggle">Minimizar</button>
-
-    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-        class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
+    <div class="list-group list-group-flush ">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" href="/">Explore</a>
+            </li>
+            <li class="nav-item">
+                <a th:if="${#request.isUserInRole('ADMIN')}" class="nav-link" href="/admin/criar-reserva">Criar
+                    Reserva</a>
+            </li>
+            <li class="nav-item">
+                <a th:if="${#request.isUserInRole('ADMIN')}" class="nav-link" href="/admin/reservas-atuais">Aluguéis</a>
+            </li>
+        </ul>
+    </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item">

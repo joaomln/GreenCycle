@@ -25,22 +25,22 @@ public class Usuario implements Serializable {
 
     @Size(min = 1, max = 255, message = "{nameRange}")
     @NotNull(message = "{notNull}")
-    private String sobrenome;
+    private String nome;
 
     @Size(min = 1, max = 255, message = "{nameRange}")
     @NotNull(message = "{notNull}")
-    private String nome;
-
-    public void setLastName(String sobrenome) {
-        this.sobrenome = sobrenome.strip();
-    }
+    private String email;
 
     public void setnome(String nome) {
         this.nome = nome.strip();
     }
 
+    public void setEmail(String email) {
+        this.nome = nome.strip();
+    }
+
     @Override
     public String toString() {
-        return "(" + idUsuario + ") " + nome + ' ' + sobrenome;
+        return nome + "   (" + email + ")";
     }
 }
