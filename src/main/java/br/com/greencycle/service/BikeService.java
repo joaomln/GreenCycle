@@ -32,22 +32,22 @@ public class BikeService {
 
     public Bike create(Bike bike) {
         if (bike.getEmpresa() == null) {
-            throw new IllegalArgumentException(messages.get("carStationNotNull"));
+            throw new IllegalArgumentException(messages.get("bikeEnterpriseNotNull"));
         }
         if (bike.getEmpresa().getIdEmpresa() == null || !empresaService.existsById(bike.getEmpresa().getIdEmpresa())) {
-            throw new EntityNotFoundException(messages.get("stationNotFound"));
+            throw new EntityNotFoundException(messages.get("enterpriseNotFound"));
         }
         if (bikeRepository.existsById(bike.getIdBike())) {
-            throw new EntityExistsException(messages.get("carAlreadyExists"));
+            throw new EntityExistsException(messages.get("bikeAlreadyExists"));
         }
         return bikeRepository.save(bike);
     }
 
     public void deleteById(String idBike) {
         Bike bike = bikeRepository.findById(idBike)
-                .orElseThrow(() -> new EntityNotFoundException(messages.get("carNotFound")));
+                .orElseThrow(() -> new EntityNotFoundException(messages.get("bikeNotFound")));
         if (!canDelete(bike)) {
-            throw new IllegalArgumentException(messages.get("carDeleteError"));
+            throw new IllegalArgumentException(messages.get("bikeDeleteError"));
         }
         bikeRepository.delete(bike);
     }

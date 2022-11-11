@@ -86,7 +86,7 @@ public class AdminController {
         }
 
         if (!reservaService.canCreate(reserva)) {
-            return createRentalForm.addObject("carMismatchError", messages.get("carMismatchError"));
+            return createRentalForm.addObject("bikeMismatchError", messages.get("bikeMismatchError"));
         }
 
         reservaService.create(reserva);
